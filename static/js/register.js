@@ -43,6 +43,7 @@ passwordCheckbox.addEventListener("click", () => {
 });
 
 // Функція валідації
+const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
 const passwordNotEmpty = passwordInput.value.trim().length > 4;
 const passwordIsEqual = passwordInput.value === password2Input.value;
 
