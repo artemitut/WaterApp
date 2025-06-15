@@ -1,0 +1,151 @@
+.loggin__name
+    font-size: 2.4rem
+    text-align: center
+    margin-bottom: 5rem
+
+form
+    justify-content: left
+    display: flex
+    flex-wrap: wrap
+    padding-bottom: 16.5rem 
+    & label
+        padding-left: 2.5rem
+        padding-bottom: 2rem
+.input_email, .input_password, .input_date, .input_username, .input_sex, .input_weight
+    height: 6.5rem
+    width: 100%
+    padding: 0 2.5rem
+    display: flex
+    border-top: 1px solid #F0F0F0
+    border-bottom: 1px solid #F0F0F0
+    margin: 1rem 0
+    & input
+        width: calc( 100% -  3.2rem)
+        border: 0px
+        outline: none
+.input_email
+    &::before
+        background-image: url("../images/sms.svg")
+        content: ""
+        width: 32px
+        height: 32px
+        transform: translateY(50%)
+        background-repeat: no-repeat
+        background-position: center
+.input_password
+    &::before
+        background-image: url("../images/password-check.svg")
+        content: ""
+        width: 32px
+        height: 32px
+        transform: translateY(50%)
+        background-repeat: no-repeat
+        background-position: center
+    &_after
+        background-image: url("../images/eye2.svg")
+        transition: .3s
+        width: 32px
+        height: 32px
+        transform: translateY(50%)
+        color: red
+        background-repeat: no-repeat
+        background-position: center
+
+.input_username
+    &::before
+        background-image: url("../images/user.svg")
+        content: ""
+        width: 32px
+        height: 32px
+        transform: translateY(50%)
+        background-repeat: no-repeat
+        background-position: center
+
+.input_sex
+    & select
+        width: calc( 100% -  3.2rem)
+        border: 0px
+        outline: none
+    &::before
+        background-image: url("../images/sex.svg")
+        content: ""
+        width: 32px
+        height: 32px
+        transform: translateY(50%)
+        background-repeat: no-repeat
+        background-position: center
+
+.input_weight
+    &::before
+        background-image: url("../images/weight.svg")
+        content: ""
+        width: 32px
+        height: 32px
+        transform: translateY(50%)
+        background-repeat: no-repeat
+        background-position: center
+    
+.bottom
+    width: 100%
+    position: fixed
+    bottom: 0px
+    left: 0px
+    z-index: 1000
+.register_button, .loggin_button, .change_password__button
+    border: 0px
+    border-top: 1px solid #F0F0F0
+    border-bottom: 1px solid #F0F0F0
+    background-color: #FFFFFF
+    height: 6.5rem
+    width: 100%
+    text-align: center
+
+.register__form
+    overflow: hidden
+    position: relative
+    padding: 0
+    margin-bottom: 16.5rem
+    height: 35rem
+    &__block
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        transition: transform 0.5s ease, opacity 0.5s ease
+        will-change: transform, opacity
+    &__block_1
+        transform: translateX(0)
+        opacity: 1
+        z-index: 2
+    &__block_1.slide-left
+        transform: translateX(-100%)
+        opacity: 0
+    &__block_2
+        transform: translateX(100%)
+        opacity: 0
+        z-index: 1
+        display: block
+    &__block_2.slide-in
+        transform: translateX(0)
+        opacity: 1
+        z-index: 2
+
+.login__button
+    height: 10rem
+    background-color: #F0F0F0
+    border: 0px
+    width: 100%
+    text-align: center
+    &_active
+        background-color: $color-blue
+        color: white
+
+.register__button, .change_password__button
+    height: 10rem
+    background-color: #F0F0F0
+    border: 0px
+    width: 100%
+    text-align: center
+    &_active
+        background-color: $color-blue
+        color: white

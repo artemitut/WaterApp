@@ -1,0 +1,116 @@
+.home
+    &__water_count
+        height: calc( 100% - 6.5rem )
+    &__left
+        background-color: white
+        display: flex
+        justify-content: center
+        align-items: center
+        text-align: center
+        border-top: 1px solid#F0F0F0
+        min-height: 6rem
+        max-height: calc( 100% - 6rem )
+    &__left__text
+        color: $color-lightblue
+    &__left__span
+        font-size: 2.4rem
+        font-weight: 700
+        color: $color-blue
+    &__already
+        background-color: $color-blue
+        display: flex
+        justify-content: center
+        align-items: center
+        text-align: center
+        min-height: 6rem
+        max-height: calc( 100% - 6rem )
+    &__already__text
+        font-size: 2.4rem
+        color: #DEEBFF
+    &__already__span
+        font-size: 3.2rem
+        font-weight: 700
+        color: white
+    &__add
+        height: 6.5rem
+        width: 100%
+        display: flex
+        justify-content: center
+        align-items: center
+        background-color: white
+        border: 0px solid #F0F0F0
+        border-bottom: 1px solid #F0F0F0
+        color: $color-gray
+        font-size: 2.4rem
+        font-weight: 500
+        cursor: pointer
+    
+.waterForm
+    padding: 0
+    position: fixed
+    top: 20%
+    left: -100%
+    width: 80%
+    height: 60%
+    opacity: 0
+    border-radius: 2%
+    overflow: hidden
+    z-index: 9999
+    transition: left 0.4s ease, opacity 0.4s ease
+    display: flex
+    flex-direction: column
+    justify-content: center
+    box-shadow: 0px 0px 70px -8px rgba($color-gray,0.75)
+    -webkit-box-shadow: 0px 0px 70px -8px rgba($color-gray,0.75)
+    -moz-box-shadow: 0px 0px 70px -8px rgba($color-gray,0.75)
+    &.active
+        left: 10%
+        opacity: 1
+    &__button, &__input
+        width: 100%
+        display: flex
+        justify-content: center
+        align-items: center
+        text-align: center
+        height: 20%
+        background-color: white 
+        font-size: 2.4rem
+        font-weight: 400
+        color: $color-blue
+        border: 0
+        border-bottom: 1px solid $color-blue
+        transition: background-color .3s, color .3s
+    &__button
+        cursor: pointer
+    &__button:hover
+        background-color: $color-lightblue
+        color: white
+        transition: background-color .3s, color .3s
+    &__button:hover svg path
+        fill: white
+        transition: fill .3s
+    &__button svg
+        width: 1.5rem
+        height: 1.5rem
+        margin-right: 0.7rem
+    &__button svg path
+        fill: $color-blue
+    &__input
+        padding: 0 5%
+        border: 0
+    &__input:focus
+        border: 0
+        border-top: 0
+        outline: none
+.eigenvalue
+    transition: opacity 0.4s ease
+    border: 0
+    background-color: $color-gray
+    color: white
+    & svg path
+        fill: white
+    &_active
+        background-color: $color-blue
+.blur
+  filter: grayscale(90%) blur(5px)
+  transition: filter 0.3s ease

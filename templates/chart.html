@@ -1,0 +1,177 @@
+{% extends "layout.html" %} {% block title %}WaterApp{% endblock %} {% block
+body%}
+<div class="wrapper">
+  <header class="header">
+    <div class="header__date">
+      <p class="header__date__day"></p>
+      <p class="header__date__num"></p>
+    </div>
+    <div class="header__logout">
+      <a href="{{ url_for('logout') }}"
+        ><img
+          src="{{ url_for('static', filename='images/logout.svg') }}"
+          alt="Logout"
+          class="header__logout__img"
+      /></a>
+    </div>
+  </header>
+  <main class="main chart">
+    <nav class="chart__nav">
+      <p class="chart__nav__p" id="chart__nav__p_1">Історія</p>
+      <p class="chart__nav__p" id="chart__nav__p_2">Неділя</p>
+      <p class="chart__nav__p" id="chart__nav__p_3">Місяць</p>
+    </nav>
+    <div class="chart__container">
+      <div class="chart__slide chart__slide_1">
+        {% for log in last_water_logs %}
+        <div class="chart__note">
+          <div class="chart__note__content">
+            <p class="chart__note__ml">+{{ log.amount_ml }} ml</p>
+            <div class="chart__note__date">
+              <p class="chart__note__day">{{ log.day }}</p>
+              <p class="chart__note__time">{{ log.time }}</p>
+            </div>
+          </div>
+          <div class="chart__note__del" data-id="{{ log.id }}">
+            <img
+              src="{{ url_for('static', filename='images/del.svg') }}"
+              alt="Видалити"
+            />
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="chart__slide">
+        <canvas id="weekChart"></canvas>
+      </div>
+      <div class="chart__slide">
+        <canvas id="monthChart"></canvas>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="footer__container">
+      <a href="#"
+        ><img
+          src="{{ url_for('static', filename='images/chart-2.svg') }}"
+          alt="Chart"
+      /></a>
+      <a href="/"
+        ><img
+          src="{{ url_for('static', filename='images/home.svg') }}"
+          alt="Home"
+      /></a>
+      <a href="{{ url_for('settings') }}"
+        ><img
+          src="{{ url_for('static', filename='images/setting.svg') }}"
+          alt="Settings"
+      /></a>
+    </div>
+  </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+      const week_labels = {{ week_chart_labels|tojson }};
+      const week_values = {{ week_chart_values|tojson }};
+      const month_labels = {{ month_chart_labels|tojson }};
+      const month_values = {{ month_chart_values|tojson }};
+      const goal = {{ goal|tojson }};
+
+      const week = document.getElementById("weekChart").getContext("2d");
+      const month = document.getElementById("monthChart").getContext("2d");
+      new Chart(week, {
+        type: "bar",
+        data: {
+          labels: week_labels,
+          datasets: [{
+            label: "Випито (мл)",
+            data: week_values,
+            backgroundColor: week_values.map(v => v >= goal ? "#78AEFF" : "#A5C8FF"),
+            borderColor: week_values.map(v => v >= goal ? "#78AEFF" : "#A5C8FF"),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        },
+        plugins: [{
+            id: 'goalLine',
+            afterDraw(chart) {
+              const { ctx, chartArea: { left, right }, scales: { y } } = chart;
+              const yPos = y.getPixelForValue(goal);
+
+              ctx.save();
+              ctx.strokeStyle = "rgba(54, 162, 235, 0.8)";
+              ctx.lineWidth = 2;
+              ctx.setLineDash([5, 5]);
+              ctx.beginPath();
+              ctx.moveTo(left, yPos);
+              ctx.lineTo(right, yPos);
+              ctx.stroke();
+              ctx.restore();
+            }
+          }]
+      });
+      new Chart(month, {
+        type: "bar",
+        data: {
+          labels: month_labels,
+          datasets: [{
+            label: "Випито (мл)",
+            data: month_values,
+            backgroundColor: month_values.map(v => v >= goal ? "#78AEFF" : "#A5C8FF"),
+            borderColor: month_values.map(v => v >= goal ? "#78AEFF" : "#A5C8FF"),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        },
+        plugins: [{
+            id: 'goalLine',
+            afterDraw(chart) {
+              const { ctx, chartArea: { left, right }, scales: { y } } = chart;
+              const yPos = y.getPixelForValue(goal);
+
+              ctx.save();
+              ctx.strokeStyle = "rgba(54, 162, 235, 0.8)";
+              ctx.lineWidth = 2;
+              ctx.setLineDash([5, 5]);
+              ctx.beginPath();
+              ctx.moveTo(left, yPos);
+              ctx.lineTo(right, yPos);
+              ctx.stroke();
+              ctx.restore();
+            }
+          }]
+      });
+
+  });
+</script>
+
+<script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/header.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "layout.html" %} {% block title %}WaterApp{% endblock %} {% block
+body%}
+<form
+  class="waterForm"
+  id="waterForm"
+  method="POST"
+  action="{{ url_for('index') }}"
+>
+  <button class="waterForm__button" onclick="submitWithValue('250')">
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M15 0H21V36H15V0Z" fill="#D9D9D9" />
+      <path d="M36 15V21L0 21L2.62268e-07 15L36 15Z" fill="#D9D9D9" />
+    </svg>
+    250 мл
+  </button>
+  <button class="waterForm__button" onclick="submitWithValue('300')">
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M15 0H21V36H15V0Z" fill="#D9D9D9" />
+      <path d="M36 15V21L0 21L2.62268e-07 15L36 15Z" fill="#D9D9D9" />
+    </svg>
+    300 мл
+  </button>
+  <button class="waterForm__button" onclick="submitWithValue('1000')">
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M15 0H21V36H15V0Z" fill="#D9D9D9" />
+      <path d="M36 15V21L0 21L2.62268e-07 15L36 15Z" fill="#D9D9D9" />
+    </svg>
+    1 л
+  </button>
+  <input
+    type="text"
+    name="waterCount"
+    id="inputWaterCount"
+    class="waterForm__input"
+    placeholder="Введіть значення в мл"
+    min="1"
+    max="5000"
+    required
+  />
+  <button class="waterForm__button eigenvalue" id="eigenvalue" type="submit">
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M15 0H21V36H15V0Z" fill="#D9D9D9" />
+      <path d="M36 15V21L0 21L2.62268e-07 15L36 15Z" fill="#D9D9D9" />
+    </svg>
+    0 мл
+  </button>
+</form>
+<div class="wrapper">
+  <header class="header">
+    <div class="header__date">
+      <p class="header__date__day"></p>
+      <p class="header__date__num"></p>
+    </div>
+    <div class="header__logout">
+      <a href="{{ url_for('logout') }}"
+        ><img
+          src="{{ url_for('static', filename='images/logout.svg') }}"
+          alt="Logout"
+          class="header__logout__img"
+      /></a>
+    </div>
+  </header>
+  <main class="main home">
+    <div class="home__water_count">
+      <div
+        class="home__left"
+        data-fill="{{ percent_left }}"
+        data-left="{{ left }}"
+      >
+        <p class="home__left__text">
+          Вам залишилось випити<br id="brLeft" /><span class="home__left__span"
+            >{{ left }} ml</span
+          >
+        </p>
+      </div>
+      <div
+        class="home__already"
+        data-fill="{{ percent_already }}"
+        data-already="{{ already }}"
+      >
+        <p class="home__already__text">
+          Сьогодні ви випили<br id="brAlready" /><span
+            class="home__already__span"
+            >{{ already }} ml</span
+          >
+        </p>
+      </div>
+    </div>
+    <button class="home__add" id="addWaterBtn">+ Додати стакан</button>
+  </main>
+  <footer class="footer">
+    <div class="footer__container">
+      <a href="{{ url_for('chart') }}"
+        ><img
+          src="{{ url_for('static', filename='images/chart.svg') }}"
+          alt="Chart"
+      /></a>
+      <a href="#"
+        ><img
+          src="{{ url_for('static', filename='images/home-2.svg') }}"
+          alt="Home"
+      /></a>
+      <a href="{{ url_for('settings') }}"
+        ><img
+          src="{{ url_for('static', filename='images/setting.svg') }}"
+          alt="Settings"
+      /></a>
+    </div>
+  </footer>
+</div>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+<script src="{{ url_for('static', filename='js/header.js') }}"></script>
+{% endblock %}

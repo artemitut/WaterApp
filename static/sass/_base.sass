@@ -1,0 +1,93 @@
+*, ::after, ::before
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+html
+    font-size: 10px
+
+img
+    background-repeat: no-repeat
+
+.wrapper
+    display: flex
+    flex-direction: column
+    height: 100vh
+
+.header
+    padding: 6rem 2.5rem 2.5rem 2.5rem
+    display: flex
+    justify-content: space-between
+    &__date__day
+        font-size: 3.2rem
+        font-weight: 700
+        color: $color-gray
+    &__date__num
+        font-size: 2.4rem
+        color: $color-lightgray
+    &__logout
+        display: flex
+        justify-content: center
+        align-items: center
+    &__logout__img
+        width: 3.2rem
+        height: 3.2rem
+
+.footer
+    padding: 3rem 2.5rem 3.8rem 2.5rem
+    width: 100%
+    &__container
+        display: flex
+        justify-content: space-around
+
+.main
+    flex-grow: 1
+    // overflow-y: auto
+
+.alert
+    position: fixed
+    top: 2rem
+    left: 5%
+    width: 90%
+    height: 10rem
+    transition: .5s
+    z-index: 9999
+    background-color: white
+    & div
+        position: relative
+        top: 0
+        left: 0
+        height: 100%
+        font-size: 2.4rem
+        display: flex
+        align-items: center
+        justify-content: center
+        text-align: center
+        padding: 0 1rem
+    &__top
+        background-color: $color-gray
+        color: white
+        animation: 7s ease-out slice
+        animation-fill-mode: forwards
+        z-index: 9999
+    &__top_success
+        background-color: $color-blue
+    &__bottom
+        left: 3px
+        background-color: white
+        color: $color-gray
+        transform: translateY(-100%)
+        border: .4rem solid $color-gray
+        z-index: 9998
+        width: 101%
+        height: 102%
+    &__bottom_success
+        color: $color-blue
+        border: .4rem solid $color-blue
+
+@keyframes slice
+    0%
+        clip-path: inset(0 0 0 0)
+    100%
+        clip-path: inset(0 100% 0 0)
+
+        

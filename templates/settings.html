@@ -1,0 +1,72 @@
+{% extends "layout.html" %} {% block title %}WaterApp{% endblock %} {% block
+body%}
+<div class="wrapper">
+  <header class="header">
+    <div class="header__date">
+      <p class="header__date__day"></p>
+      <p class="header__date__num"></p>
+    </div>
+    <div class="header__logout">
+      <a href="{{ url_for('index') }}"
+        ><img
+          src="{{ url_for('static', filename='images/home-2.svg') }}"
+          alt="Logout"
+          class="header__logout__img"
+      /></a>
+    </div>
+  </header>
+  <main class="main">
+    <a href="/change_password" class="settings__change_password"
+      >Змінити пароль</a
+    >
+    <form
+      class=""
+      id="waterForm"
+      method="POST"
+      action="{{ url_for('settings') }}"
+    >
+      <label for="inputWaterCount" class="settings__form__label"
+        >Змінити ціль на день</label
+      >
+      <input
+        type="text"
+        name="waterCount"
+        id="inputWaterCount"
+        class="waterForm__input settings__form__input"
+        placeholder="Введіть значення в мл"
+        min="1"
+        max="10000"
+        required
+      />
+      <button
+        class="waterForm__button settings__form__button"
+        type="submit"
+        disable="true"
+      >
+        Встановити ціль на день 0 мл
+      </button>
+    </form>
+  </main>
+  <footer class="footer">
+    <div class="footer__container">
+      <a href="{{ url_for('chart') }}"
+        ><img
+          src="{{ url_for('static', filename='images/chart.svg') }}"
+          alt="Chart"
+      /></a>
+      <a href="/"
+        ><img
+          src="{{ url_for('static', filename='images/home.svg') }}"
+          alt="Home"
+      /></a>
+      <a href="#"
+        ><img
+          src="{{ url_for('static', filename='images/setting-2.svg') }}"
+          alt="Settings"
+      /></a>
+    </div>
+  </footer>
+</div>
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+<script src="{{ url_for('static', filename='js/header.js') }}"></script>
+{% endblock %}

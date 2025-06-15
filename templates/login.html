@@ -1,0 +1,36 @@
+{% extends "layout.html" %} {% block title %}Login{% endblock %} {% block body%}
+<h1>WaterApp</h1>
+<p class="loggin__name">Вхід</p>
+<form class="loggin__form" id="login" method="POST">
+  <label for="email">Пошта</label>
+  <div class="input_email">
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Введіть свою пошту"
+      required
+    />
+  </div>
+  <label for="password">Пароль</label>
+  <div class="input_password">
+    <input
+      type="password"
+      id="password"
+      name="password"
+      placeholder="Введіть пароль"
+      required
+    />
+    <div class="input_password_after" id="passwordCheckbox"></div>
+  </div>
+</form>
+<div class="bottom">
+  <button class="register_button">
+    <a href="./register">Зареєструватися</a>
+  </button>
+  <button id="submitBtn" class="login__button" type="submit" form="login">
+    Увійти
+  </button>
+</div>
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

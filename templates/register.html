@@ -1,0 +1,93 @@
+{% extends "layout.html" %} {% block title %}Register{% endblock %} {% block body%}
+<h1>WaterApp</h1>
+<p class="loggin__name">Реєстрація</p>
+<form class="register__form" id="register" method="POST" action="/register">
+  <div class="register__form__block register__form__block_1">
+    <label for="email">Пошта</label>
+    <div class="input_email">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Введіть свою пошту"
+        required
+      />
+    </div>
+    <label for="password">Пароль</label>
+    <div class="input_password">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Введіть пароль"
+        required
+      />
+      <div class="input_password_after" id="passwordCheckbox"></div>
+    </div>
+    <label for="password-2">Повторне введення паролю</label>
+    <div class="input_password">
+      <input
+        type="password"
+        id="password-2"
+        name="password-2"
+        placeholder="Введіть пароль повторно"
+        required
+      />
+      <div class="input_password_after" id="passwordCheckbox2"></div>
+    </div>
+  </div>
+  <div class="register__form__block register__form__block_2">
+    <div></div>
+    <label for="username">Ім'я</label>
+    <div class="input_username">
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Введіть своє ім'я"
+        required
+      />
+    </div>
+    <label for="sex">Стать</label>
+    <div class="input_sex">
+        <select
+          id="sex"
+          name="sex"
+          placeholder="Введіть своє ім'я"
+          required
+      />
+          <option value="" disabled selected>Оберіть стать</option>
+          <option value="Чоловік">Чоловік</option>
+          <option value="Жінка">Жінка</option>
+      </select>
+    </div>
+    <label for="weight">Вага</label>
+    <div class="input_weight">
+      <input
+        type="text"
+        id="weight"
+        name="weight"
+        placeholder="Введіть свою вагу"
+        pattern="\d*"
+        required
+      />
+    </div>
+  </div>
+</form>
+<div class="air"></div>
+<div class="bottom">
+  <button class="loggin_button">
+    <a href="./login">Увійти</a>
+  </button>
+  <button
+    id="submitBtn"
+    class="register__button"
+    type="submit"
+    disabled
+    form="register"
+  >
+    Далі
+  </button>
+</div>
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}
