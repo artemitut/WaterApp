@@ -1,4 +1,5 @@
-{% extends "layout.html" %} {% block title %}Register{% endblock %} {% block body%}
+{% extends "layout.html" %} {% block title %}Register{% endblock %} {% block
+body%}
 <h1>WaterApp</h1>
 <p class="loggin__name">Реєстрація</p>
 <form class="register__form" id="register" method="POST" action="/register">
@@ -50,15 +51,10 @@
     </div>
     <label for="sex">Стать</label>
     <div class="input_sex">
-        <select
-          id="sex"
-          name="sex"
-          placeholder="Введіть своє ім'я"
-          required
-      />
-          <option value="" disabled selected>Оберіть стать</option>
-          <option value="Чоловік">Чоловік</option>
-          <option value="Жінка">Жінка</option>
+      <select id="sex" name="sex" placeholder="Введіть своє ім'я" required>
+        <option value="" disabled selected>Оберіть стать</option>
+        <option value="Чоловік">Чоловік</option>
+        <option value="Жінка">Жінка</option>
       </select>
     </div>
     <label for="weight">Вага</label>
@@ -82,7 +78,7 @@
   <button
     id="submitBtn"
     class="register__button"
-    type="submit"
+    type="button"
     disabled
     form="register"
   >

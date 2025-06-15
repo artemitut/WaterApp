@@ -6,6 +6,7 @@ const usernameInput = document.getElementById("username");
 const submitBtn = document.getElementById("submitBtn");
 const formBlock1 = document.querySelector(".register__form__block_1");
 const formBlock2 = document.querySelector(".register__form__block_2");
+let isPassShown = false;
 
 const toggles = [
   {
@@ -30,29 +31,21 @@ toggles.forEach(({ checkbox, input }) => {
   });
 });
 
-passwordCheckbox.addEventListener("click", () => {
-  if (!isPassShown) {
-    passwordInput.type = "text";
-    passwordCheckbox.style.backgroundImage = "url('/static/images/eye.svg')";
-    isPassShown = true;
-  } else {
-    passwordInput.type = "password";
-    passwordCheckbox.style.backgroundImage = "url('/static/images/eye2.svg')";
-    isPassShown = false;
-  }
-});
-
 // Функція валідації
-const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
-const passwordNotEmpty = passwordInput.value.trim().length > 4;
-const passwordIsEqual = passwordInput.value === password2Input.value;
+function validate() {
+  // Перевіряємо, чи заповнені всі поля
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+  const passwordNotEmpty = passwordInput.value.trim().length > 4;
+  const passwordIsEqual = passwordInput.value === password2Input.value;
 
-if (emailValid && passwordNotEmpty && passwordIsEqual) {
-  submitBtn.disabled = false;
-  submitBtn.classList.add("register__button_active");
-} else {
-  submitBtn.disabled = true;
-  submitBtn.classList.remove("register__button_active");
+  // Якщо всі умови виконані, активуємо кнопку
+  if (emailValid && passwordNotEmpty && passwordIsEqual) {
+    submitBtn.disabled = false;
+    submitBtn.classList.add("register__button_active");
+  } else {
+    submitBtn.disabled = true;
+    submitBtn.classList.remove("register__button_active");
+  }
 }
 
 // Навішуємо прослуховувачі на поля для валідації в реальному часі
