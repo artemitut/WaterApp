@@ -1,17 +1,19 @@
 import calendar
+from datetime import datetime, date, timedelta
+from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+import os
 from werkzeug.security import check_password_hash, generate_password_hash
-from datetime import datetime, date, timedelta
+
+load_dotenv()
 
 app = Flask(__name__)
 
-# конфігурація БД
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///waterapp.db'
-app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-# створюємо об'єкт БД
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -169,7 +171,6 @@ def chart():
             db.session.commit()
             return jsonify({"success": True}), 200
         else:
-            # Якщо лог не знайдено, можна або повернути JSON, або редирект з flash
             flash("Запис не знайдено", "danger")
             return jsonify({"error": "Not found"}), 404
     user_id = session.get('user_id')
@@ -182,8 +183,6 @@ def chart():
     start_of_week = today - timedelta(days=today.weekday())
     end_of_week = start_of_week + timedelta(days=7)
     days_in_month = calendar.monthrange(today.year, today.month)[1]
-    print(f"Days in month: {today}")
-    print(f"Start of week: {start_of_week}, End of week: {end_of_week}")
 
     start_of_month = datetime.combine(
         today.replace(day=1), datetime.min.time())
@@ -213,7 +212,6 @@ def chart():
     ).all()
 
     week_stats = {i: 0 for i in range(7)}
-    print(f"Week logs: {type(week_stats)}")
     month_stats = {i: 0 for i in range(1, days_in_month + 1)}
 
     for log in week_logs:
@@ -240,7 +238,6 @@ def chart():
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
     if request.method == "POST":
-        print("POST request received")
         user_id = session.get('user_id')
         if not user_id:
             flash("Ви не увійшли в систему", "danger")
